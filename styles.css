@@ -1,0 +1,877 @@
+/* CSS Variable Definitions for Premium Theme */
+:root {
+  --primary-color: #ff9f43;      /* Cute Orange Chicken */
+  --primary-hover: #ff7f11;
+  --secondary-color: #1dd1a1;    /* Mint Green Success */
+  --secondary-hover: #10ac84;
+  --accent-color: #48dbfb;       /* Light Blue Info */
+  --danger-color: #ff6b6b;       /* Red Comb */
+  
+  --bg-primary: #f8f9fa;
+  --bg-gradient: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+  --card-bg: rgba(255, 255, 255, 0.92);
+  --card-border: #ffd3b6;
+  
+  --text-main: #2c3e50;
+  --text-muted: #57606f;
+  
+  --font-title: 'Fredoka', sans-serif;
+  --font-body: 'Quicksand', sans-serif;
+  
+  --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 10px 20px rgba(220, 118, 51, 0.15);
+  --shadow-lg: 0 15px 30px rgba(220, 118, 51, 0.25);
+  
+  --transition-speed: 0.3s;
+}
+
+/* Global Reset & Base Styling */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg-gradient);
+  background-attachment: fixed;
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Background Decorative Elements */
+.decorations {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.cloud {
+  position: absolute;
+  font-size: 3rem;
+  opacity: 0.4;
+  animation: floatCloud 25s linear infinite;
+}
+
+.cloud-1 {
+  top: 10%;
+  left: -10%;
+  animation-delay: 0s;
+}
+
+.cloud-2 {
+  top: 25%;
+  left: -10%;
+  animation-duration: 35s;
+  animation-delay: -10s;
+}
+
+.grass {
+  position: absolute;
+  bottom: 0;
+  font-size: 2.5rem;
+  opacity: 0.3;
+}
+
+.grass-1 {
+  left: 5%;
+}
+
+.grass-2 {
+  right: 5%;
+}
+
+@keyframes floatCloud {
+  0% {
+    transform: translateX(0vw);
+  }
+  100% {
+    transform: translateX(120vw);
+  }
+}
+
+/* Layout Container */
+.app-container {
+  width: 100%;
+  max-width: 960px;
+  margin: 20px auto;
+  padding: 0 15px;
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 40px);
+}
+
+/* Simple Header */
+.app-header {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.logo-title {
+  font-family: var(--font-title);
+  font-size: 2.2rem;
+  color: #d35400;
+  text-shadow: 2px 2px 0px #ffffff;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-icon {
+  animation: bounceLogo 2s ease-in-out infinite;
+}
+
+@keyframes bounceLogo {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(5deg); }
+}
+
+/* Progress Bar (Egg Steps) */
+.progress-bar-container {
+  background: var(--card-bg);
+  border: 3px solid var(--card-border);
+  border-radius: 20px;
+  padding: 15px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-line-bg {
+  position: absolute;
+  top: 32px;
+  left: 40px;
+  right: 40px;
+  height: 6px;
+  background: #f1f2f6;
+  border-radius: 3px;
+  z-index: 1;
+}
+
+.progress-line-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--primary-color);
+  border-radius: 3px;
+  transition: width var(--transition-speed) ease;
+}
+
+.progress-steps {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+}
+
+.step-egg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  width: 60px;
+  transition: transform 0.2s ease;
+}
+
+.step-egg:hover {
+  transform: scale(1.1);
+}
+
+.egg-visual {
+  font-size: 1.8rem;
+  width: 40px;
+  height: 40px;
+  background: #ffffff;
+  border: 2px solid #ced6e0;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-speed) ease;
+}
+
+.step-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  margin-top: 5px;
+  text-align: center;
+}
+
+/* Active & Completed Egg States */
+.step-egg.active .egg-visual {
+  border-color: var(--primary-color);
+  background: #fff8eb;
+  transform: scale(1.15);
+  box-shadow: 0 0 10px rgba(255, 159, 67, 0.4);
+}
+
+.step-egg.active .step-label {
+  color: #d35400;
+  font-weight: 700;
+}
+
+.step-egg.completed .egg-visual {
+  background: #e6fcf5;
+  border-color: var(--secondary-color);
+}
+
+.step-egg.completed .step-label {
+  color: var(--secondary-hover);
+}
+
+/* Main Content and Section Switching */
+.main-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+.sim-section {
+  display: none; /* Hidden by default */
+  width: 100%;
+  animation: fadeIn var(--transition-speed) ease forwards;
+}
+
+.sim-section.active {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Custom Cards */
+.hero-card, .educational-card, .success-card {
+  background: var(--card-bg);
+  border: 3px solid var(--card-border);
+  border-radius: 24px;
+  padding: 25px;
+  box-shadow: var(--shadow-md);
+  transition: transform var(--transition-speed) ease;
+}
+
+.hero-card:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+.section-title {
+  font-family: var(--font-title);
+  font-size: 1.8rem;
+  color: #e67e22;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.step-num {
+  background: var(--primary-color);
+  color: white;
+  font-size: 0.9rem;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-family: var(--font-body);
+  font-weight: 700;
+}
+
+.info-subtitle {
+  font-family: var(--font-title);
+  font-size: 1.25rem;
+  color: var(--text-main);
+  margin-bottom: 10px;
+}
+
+.description-text {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--text-main);
+}
+
+.explanation-box {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  border-left: 5px solid var(--primary-color);
+  padding-left: 15px;
+  color: var(--text-main);
+}
+
+.formula-box {
+  display: inline-block;
+  background: #fff3e0;
+  border: 2px dashed #ffb74d;
+  padding: 10px 15px;
+  border-radius: 10px;
+  font-family: monospace;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 10px 0;
+  color: #e65100;
+}
+
+.illustration-box {
+  margin-top: 15px;
+}
+
+.bubble-info {
+  display: inline-block;
+  background: #e3fafc;
+  border: 1px solid #99e9f2;
+  color: #0b7285;
+  padding: 12px 18px;
+  border-radius: 15px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* Hero elements */
+.hero-image {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.cute-chicken-hero {
+  animation: wobbleHero 3s ease-in-out infinite;
+  transform-origin: center bottom;
+}
+
+@keyframes wobbleHero {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.05) rotate(3deg); }
+}
+
+/* Dynamic Chicken Cards Grid */
+.chicken-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.chicken-card {
+  background: white;
+  border: 2.5px solid #ffe8cc;
+  border-radius: 20px;
+  padding: 15px;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.chicken-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary-color);
+}
+
+.chicken-card.breeder-male {
+  border-color: #ffd8a8;
+  background: #fff9db;
+}
+
+.chicken-card.breeder-female {
+  border-color: #ffdeeb;
+  background: #fff0f6;
+}
+
+.chicken-card.selected-highlight {
+  border-color: var(--secondary-color);
+  box-shadow: 0 0 15px rgba(29, 209, 161, 0.4);
+  transform: translateY(-5px) scale(1.03);
+}
+
+.chicken-card.selected-highlight::before {
+  content: "👑 INDUK UNGGUL";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: var(--secondary-color);
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 3px 0;
+}
+
+.chicken-card-icon {
+  margin: 10px auto;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chicken-gender-badge {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 10px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: white;
+}
+
+.gender-jantan {
+  background: #48dbfb;
+}
+
+.gender-betina {
+  background: #ff80b0;
+}
+
+.chicken-name {
+  font-family: var(--font-title);
+  font-size: 1.1rem;
+  margin-bottom: 5px;
+}
+
+/* Genes Legend & Badges */
+.genes-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.gene-badge {
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: white;
+}
+
+.w-badge { background: #ff7f11; }
+.h-badge { background: #1dd1a1; }
+.e-badge { background: #48dbfb; }
+
+/* Tables Styling */
+.stage-result-container {
+  background: var(--card-bg);
+  border: 3px solid var(--card-border);
+  border-radius: 24px;
+  padding: 20px;
+  box-shadow: var(--shadow-md);
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  border-radius: 16px;
+  border: 2px solid #ffe8cc;
+}
+
+.cute-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.95rem;
+  background: white;
+}
+
+.cute-table th {
+  background: #ffe8cc;
+  color: #d35400;
+  font-family: var(--font-title);
+  padding: 12px 15px;
+  font-weight: 600;
+}
+
+.cute-table td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #f8f9fa;
+  color: var(--text-main);
+  vertical-align: middle;
+}
+
+.cute-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.cute-table tbody tr:hover {
+  background: #fffcf8;
+}
+
+.cute-table tbody tr.highlight-row {
+  background: #e6fcf5;
+}
+
+.cute-table tbody tr.highlight-male {
+  background: #e3fafc;
+}
+
+.cute-table tbody tr.highlight-female {
+  background: #fff0f6;
+}
+
+/* Specific styling for chromosome values */
+.value-weight { color: #ff7f11; font-weight: 700; }
+.value-health { color: #10ac84; font-weight: 700; }
+.value-eggs { color: #2980b9; font-weight: 700; }
+.value-fitness { color: #e67e22; font-weight: 700; font-size: 1.05rem; }
+
+/* Selection breeders layout */
+.breeder-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.selection-grid-container {
+  background: var(--card-bg);
+  border: 3px solid var(--card-border);
+  border-radius: 24px;
+  padding: 20px;
+  box-shadow: var(--shadow-md);
+}
+
+.selection-heading {
+  font-family: var(--font-title);
+  font-size: 1.25rem;
+  color: #d35400;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+/* Mutation label colors */
+.mutation-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 10px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: white;
+}
+
+.mutated {
+  background: var(--danger-color);
+  animation: pulseMutation 1.5s infinite alternate;
+}
+
+.no-mutation {
+  background: var(--text-muted);
+}
+
+@keyframes pulseMutation {
+  0% { transform: scale(1); box-shadow: 0 0 0 rgba(255, 107, 107, 0.4); }
+  100% { transform: scale(1.05); box-shadow: 0 0 8px rgba(255, 107, 107, 0.8); }
+}
+
+/* Success Card & final summary styling */
+.success-animation {
+  font-size: 4rem;
+  animation: bounceLogo 1.5s ease-in-out infinite;
+  margin-bottom: 10px;
+}
+
+.success-title {
+  font-family: var(--font-title);
+  font-size: 2rem;
+  color: #27ae60;
+  margin-bottom: 5px;
+}
+
+.success-subtitle {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  margin-bottom: 25px;
+}
+
+.summary-container {
+  margin-bottom: 25px;
+}
+
+.summary-title {
+  font-family: var(--font-title);
+  font-size: 1.3rem;
+  color: var(--text-main);
+  border-bottom: 2px solid var(--card-border);
+  padding-bottom: 8px;
+  margin-bottom: 15px;
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.summary-item {
+  background: white;
+  border: 2px solid var(--card-border);
+  border-radius: 16px;
+  padding: 15px;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.summary-icon {
+  font-size: 1.8rem;
+  margin-bottom: 5px;
+}
+
+.summary-label {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.summary-value {
+  font-family: var(--font-title);
+  font-size: 1.2rem;
+  color: #d35400;
+  margin-top: 5px;
+}
+
+/* Comparison Bar Chart styling */
+.comparison-visual {
+  background: white;
+  border: 2px solid var(--card-border);
+  border-radius: 18px;
+  padding: 20px;
+}
+
+.comparison-title {
+  font-family: var(--font-title);
+  font-size: 1.1rem;
+  color: var(--text-main);
+  margin-bottom: 15px;
+}
+
+.comparison-bar-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.bar-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.bar-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.bar-pair {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: #f8f9fa;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+.bar {
+  height: 24px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  padding-left: 12px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: white;
+  transition: width 1s cubic-bezier(0.22, 1, 0.36, 1);
+  white-space: nowrap;
+}
+
+.bar-before {
+  background: #a4b0be;
+}
+
+.bar-after {
+  background: var(--secondary-color);
+  box-shadow: 0 0 8px rgba(29, 209, 161, 0.4);
+}
+
+.bar-text {
+  text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.15);
+}
+
+/* BUTTONS */
+.btn {
+  font-family: var(--font-title);
+  font-size: 1.15rem;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s ease;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn-start {
+  background: var(--primary-color);
+  color: white;
+  border-bottom: 4px solid #e67e22;
+}
+
+.btn-start:hover {
+  background: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-reset {
+  background: #341f97;
+  color: white;
+  border-bottom: 4px solid #1e272e;
+}
+
+.btn-reset:hover {
+  background: #5f27cd;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Navigation Footer (Prev & Next) */
+.app-footer {
+  margin-top: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--card-bg);
+  border: 3px solid var(--card-border);
+  border-radius: 20px;
+  padding: 15px 25px;
+  box-shadow: var(--shadow-sm);
+}
+
+.nav-btn {
+  font-family: var(--font-title);
+  font-size: 1.05rem;
+  padding: 10px 25px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.btn-primary {
+  background: var(--primary-color);
+  color: white;
+  border-bottom: 3px solid #e67e22;
+}
+
+.btn-primary:hover {
+  background: var(--primary-hover);
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background: #ced6e0;
+  color: var(--text-main);
+  border-bottom: 3px solid #a4b0be;
+}
+
+.btn-secondary:hover {
+  background: #b2bec3;
+  transform: translateY(-2px);
+}
+
+.footer-hint {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  text-align: center;
+}
+
+/* Responsive Media Queries */
+@media (max-width: 768px) {
+  .logo-title {
+    font-size: 1.8rem;
+  }
+  
+  .progress-bar-container {
+    padding: 10px;
+  }
+  
+  .progress-line-bg {
+    top: 25px;
+    left: 20px;
+    right: 20px;
+    height: 4px;
+  }
+  
+  .step-egg {
+    width: 45px;
+  }
+  
+  .egg-visual {
+    font-size: 1.3rem;
+    width: 30px;
+    height: 30px;
+  }
+  
+  .step-label {
+    font-size: 0.6rem;
+  }
+  
+  .hero-card, .educational-card, .success-card, .stage-result-container, .selection-grid-container {
+    padding: 15px;
+    border-radius: 16px;
+  }
+  
+  .section-title {
+    font-size: 1.4rem;
+  }
+  
+  .cute-table {
+    font-size: 0.85rem;
+  }
+  
+  .cute-table th, .cute-table td {
+    padding: 8px 10px;
+  }
+  
+  .app-footer {
+    padding: 10px 15px;
+    flex-direction: row;
+  }
+  
+  .nav-btn {
+    padding: 8px 15px;
+    font-size: 0.95rem;
+  }
+  
+  .footer-hint {
+    display: none; /* Hide on mobile to save space */
+  }
+
+  .chicken-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+}

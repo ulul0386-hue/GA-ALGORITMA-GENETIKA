@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulasi Algoritma Genetika - Pemilihan Ayam Unggul</title>
+  
+  <!-- Google Fonts for Friendly & Premium Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Background Decorative SVGs -->
+  <div class="decorations">
+    <div class="cloud cloud-1">☁️</div>
+    <div class="cloud cloud-2">☁️</div>
+    <div class="grass grass-1">🌿</div>
+    <div class="grass grass-2">🌿</div>
+  </div>
+
+  <div class="app-container">
+    <!-- Simple Header -->
+    <header class="app-header">
+      <h1 class="logo-title">
+        <span class="logo-icon">🐣</span> Algoritma Genetika
+      </h1>
+    </header>
+
+    <!-- Kid-friendly Progress Bar (Egg Path) -->
+    <div class="progress-bar-container" id="progress-container" style="display: none;">
+      <div class="progress-line-bg">
+        <div class="progress-line-fill" id="progress-fill"></div>
+      </div>
+      <div class="progress-steps">
+        <div class="step-egg active" data-step="0">
+          <div class="egg-visual">🥚</div>
+          <div class="step-label">Mulai</div>
+        </div>
+        <div class="step-egg" data-step="1">
+          <div class="egg-visual">🥚</div>
+          <div class="step-label">Populasi</div>
+        </div>
+        <div class="step-egg" data-step="2">
+          <div class="egg-visual">🥚</div>
+          <div class="step-label">Kromosom</div>
+        </div>
+        <div class="step-egg" data-step="3">
+          <div class="egg-visual">🥚</div>
+          <div class="step-label">Fitness</div>
+        </div>
+        <div class="step-egg" data-step="4">
+          <div class="egg-visual">🥚</div>
+          <div class="step-label">Seleksi</div>
+        </div>
+        <div class="step-egg" data-step="5">
+          <div class="egg-visual">🥚</div>
+          <div class="step-label">Crossover</div>
+        </div>
+        <div class="step-egg" data-step="6">
+          <div class="egg-visual">🥚</div>
+          <div class="step-label">Mutasi</div>
+        </div>
+        <div class="step-egg" data-step="7">
+          <div class="egg-visual">🐣</div>
+          <div class="step-label">Hasil</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content Area containing all stages -->
+    <main class="main-content">
+
+      <!-- Halaman 1: Beranda -->
+      <section id="section-0" class="sim-section active">
+        <div class="hero-card">
+          <div class="hero-image">
+            <!-- Animated Hero Chicken -->
+            <div class="cute-chicken-hero">
+              <svg viewBox="0 0 100 100" width="160" height="160">
+                <defs>
+                  <radialGradient id="bodyGrad" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#FFEAA7" />
+                    <stop offset="100%" stop-color="#FDCB6E" />
+                  </radialGradient>
+                </defs>
+                <!-- Tail feathers -->
+                <path d="M 25 50 C 10 30, 15 15, 30 25 C 20 5, 5 10, 15 35 Z" fill="#E17055" />
+                <!-- Body -->
+                <circle cx="50" cy="55" r="32" fill="url(#bodyGrad)" />
+                <!-- Wing -->
+                <path d="M 35 55 C 35 45, 50 45, 52 52 C 55 60, 42 62, 35 55 Z" fill="#FFEAA7" />
+                <path d="M 38 56 C 38 48, 48 48, 50 53 C 52 58, 43 60, 38 56 Z" fill="#FFB142" />
+                <!-- Comb (Jengger) -->
+                <path d="M 45 25 C 45 15, 55 12, 57 20 C 62 10, 68 15, 65 24 Z" fill="#D63031" />
+                <!-- Wattle (Gelambir) -->
+                <path d="M 75 56 C 75 62, 70 65, 68 56 Z" fill="#D63031" />
+                <!-- Beak (Paruh) -->
+                <polygon points="72,45 84,49 72,53" fill="#FF7675" />
+                <!-- Eye -->
+                <circle cx="62" cy="40" r="4.5" fill="#2C3E50" />
+                <circle cx="63.5" cy="38.5" r="1.5" fill="#FFFFFF" />
+                <!-- Feet -->
+                <path d="M 42 85 L 42 93 M 42 93 L 37 93 M 42 93 L 47 93" stroke="#E17055" stroke-width="4" stroke-linecap="round" />
+                <path d="M 58 85 L 58 93 M 58 93 L 53 93 M 58 93 L 63 93" stroke="#E17055" stroke-width="4" stroke-linecap="round" />
+              </svg>
+            </div>
+          </div>
+          <h2 class="section-title text-center">Selamat Datang di Penerapan Algoritma Genetika</h2>
+          <div class="card-content">
+            <h3 class="info-subtitle">Apa itu Algoritma Genetika?</h3>
+            <p class="description-text">
+              <strong>Algoritma Genetika (AG)</strong> adalah teknik pencarian heuristik yang terinspirasi langsung dari teori evolusi biologis Charles Darwin. Algoritma ini mensimulasikan proses seleksi alam untuk menemukan solusi terbaik dari ruang pencarian yang kompleks.
+            </p>
+            <div class="illustration-box text-center">
+              <span class="bubble-info">💡 Di game ini, kita akan menggunakan Algoritma Genetika untuk memilih <strong>Ayam Unggul</strong> (Ayam yang berat, tahan penyakit, dan menghasilkan banyak telur)!</span>
+            </div>
+          </div>
+          <div class="start-btn-container text-center">
+            <button id="btn-start" class="btn btn-start">Mulai Simulasi 🚀</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Halaman 2: Populasi -->
+      <section id="section-1" class="sim-section">
+        <h2 class="section-title"><span class="step-num">Tahap 1</span> Populasi Awal</h2>
+        <div class="educational-card">
+          <div class="card-content">
+            <p class="explanation-box">
+              <strong>Populasi</strong> adalah kumpulan individu awal yang akan diproses oleh algoritma genetika. Di peternakan kita, populasi awalnya adalah <strong>10 ekor ayam</strong> dengan kombinasi jenis kelamin yang diacak (4 Jantan dan 6 Betina).
+            </p>
+          </div>
+        </div>
+        
+        <div class="stage-result-container">
+          <div class="table-wrapper">
+            <table class="cute-table" id="table-populasi">
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th>Nama Ayam</th>
+                  <th>Jenis Kelamin</th>
+                  <th>Visual</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Populated dynamically via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Halaman 3: Kromosom -->
+      <section id="section-2" class="sim-section">
+        <h2 class="section-title"><span class="step-num">Tahap 2</span> Kromosom</h2>
+        <div class="educational-card">
+          <div class="card-content">
+            <p class="explanation-box">
+              <strong>Kromosom</strong> adalah representasi karakteristik (gen) setiap individu yang digunakan dalam proses evaluasi. Ayam-ayam kita memiliki 3 buah gen pada kromosomnya:
+            </p>
+            <div class="genes-legend">
+              <span class="gene-badge w-badge">⚖️ Berat (1.5 - 3.5 kg)</span>
+              <span class="gene-badge h-badge">🛡️ Tahan Penyakit (60% - 100%)</span>
+              <span class="gene-badge e-badge">🥚 Jumlah Telur (150 - 300 butir, Betina saja!)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="stage-result-container">
+          <div class="table-wrapper">
+            <table class="cute-table" id="table-kromosom">
+              <thead>
+                <tr>
+                  <th>Nama Ayam</th>
+                  <th>Berat (kg)</th>
+                  <th>Tahan Penyakit</th>
+                  <th>Jumlah Telur</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Populated dynamically via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Halaman 4: Fitness -->
+      <section id="section-3" class="sim-section">
+        <h2 class="section-title"><span class="step-num">Tahap 3</span> Nilai Fitness</h2>
+        <div class="educational-card">
+          <div class="card-content">
+            <p class="explanation-box">
+              <strong>Fitness</strong> menunjukkan seberapa baik kualitas setiap ayam dibandingkan ayam lainnya. Semakin besar nilai fitness, semakin unggul ayam tersebut! 
+              <br><br>
+              <strong>Rumus Fitness:</strong><br>
+              <span class="formula-box">Fitness = (Berat × 30) + (Tahan Penyakit × 0.5) + (Jumlah Telur × 0.2)</span>
+              <br>
+              <small>*Catatan: Jika ayam jantan, jumlah telur dihitung 0.</small>
+            </p>
+          </div>
+        </div>
+
+        <div class="stage-result-container">
+          <div class="table-wrapper">
+            <table class="cute-table" id="table-fitness">
+              <thead>
+                <tr>
+                  <th>Peringkat</th>
+                  <th>Nama Ayam</th>
+                  <th>Jenis Kelamin</th>
+                  <th>Detail Genetik (Berat, Tahan, Telur)</th>
+                  <th>Skor Fitness</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Populated dynamically via JS. Sorted by fitness desc -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Halaman 5: Seleksi -->
+      <section id="section-4" class="sim-section">
+        <h2 class="section-title"><span class="step-num">Tahap 4</span> Seleksi</h2>
+        <div class="educational-card">
+          <div class="card-content">
+            <p class="explanation-box">
+              Hanya individu terbaik yang dipilih untuk menghasilkan generasi berikutnya.
+            </p>
+          </div>
+        </div>
+
+        <div class="stage-result-container">
+          <div class="table-wrapper">
+            <table class="cute-table" id="table-seleksi">
+              <thead>
+                <tr>
+                  <th>Nama Ayam</th>
+                  <th>Jenis Kelamin</th>
+                  <th>Fitness</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Populated dynamically via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="selection-grid-container">
+          <h3 class="selection-heading">Induk Terpilih (Visual)</h3>
+          <div class="breeder-cards" id="breeder-cards-container">
+            <!-- Populated dynamically via JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Halaman 6: Crossover -->
+      <section id="section-5" class="sim-section">
+        <h2 class="section-title"><span class="step-num">Tahap 5</span> Crossover (Persilangan)</h2>
+        <div class="educational-card">
+          <div class="card-content">
+            <p class="explanation-box">
+              <strong>Crossover</strong> menggabungkan sifat (gen) dari kedua induk untuk menghasilkan keturunan baru. 1 Ayam Jantan terbaik akan dipasangkan dengan 4 Ayam Betina terbaik untuk menghasilkan <strong>4 anak ayam</strong>.
+              <br><br>
+              <strong>Aturan Persilangan:</strong> Sifat anak diperoleh dari nilai rata-rata kedua induknya.<br>
+              <span class="formula-box">Sifat Anak = (Sifat Ayah + Sifat Ibu) / 2</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="stage-result-container">
+          <div class="table-wrapper">
+            <table class="cute-table" id="table-crossover">
+              <thead>
+                <tr>
+                  <th>Anak</th>
+                  <th>Induk (Ayah × Ibu)</th>
+                  <th>Berat (kg)</th>
+                  <th>Tahan Penyakit</th>
+                  <th>Jumlah Telur</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Populated dynamically via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Halaman 7: Mutasi -->
+      <section id="section-6" class="sim-section">
+        <h2 class="section-title"><span class="step-num">Tahap 6</span> Mutasi</h2>
+        <div class="educational-card">
+          <div class="card-content">
+            <p class="explanation-box">
+              Mutasi memberikan variasi baru sehingga populasi tidak terjebak pada solusi yang sama.
+            </p>
+          </div>
+        </div>
+
+        <div class="stage-result-container">
+          <div class="table-wrapper">
+            <table class="cute-table" id="table-mutasi">
+              <thead>
+                <tr>
+                  <th>Anak</th>
+                  <th>Sifat Baru</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Populated dynamically via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Halaman 8: Hasil Akhir -->
+      <section id="section-7" class="sim-section">
+        <div class="success-card">
+          <div class="success-header text-center">
+            <div class="success-animation">🎉</div>
+            <h2 class="success-title">Generasi Baru Berhasil Dibentuk!</h2>
+            <p class="success-subtitle">Peternakan kita sekarang memiliki generasi ayam yang lebih unggul!</p>
+          </div>
+
+          <div class="summary-container">
+            <h3 class="summary-title">📋 Ringkasan Evolusi</h3>
+            <div class="summary-grid">
+              <div class="summary-item">
+                <span class="summary-icon">🐔</span>
+                <span class="summary-label">Populasi Awal</span>
+                <span class="summary-value" id="sum-pop-awal">10 Ayam</span>
+              </div>
+              <div class="summary-item">
+                <span class="summary-icon">🏆</span>
+                <span class="summary-label">Ayam Terpilih (Induk)</span>
+                <span class="summary-value" id="sum-induk">5 Ayam</span>
+              </div>
+              <div class="summary-item">
+                <span class="summary-icon">🐣</span>
+                <span class="summary-label">Keturunan Crossover</span>
+                <span class="summary-value" id="sum-crossover">4 Ayam</span>
+              </div>
+              <div class="summary-item">
+                <span class="summary-icon">⚡</span>
+                <span class="summary-label">Terjadi Mutasi?</span>
+                <span class="summary-value" id="sum-mutasi">Ya (1 Anak)</span>
+              </div>
+            </div>
+
+            <!-- Comparison visual -->
+            <div class="comparison-visual">
+              <h4 class="comparison-title">📈 Perbandingan Rata-rata Kualitas (Awal vs Baru)</h4>
+              <div class="comparison-bar-chart">
+                <div class="bar-group">
+                  <span class="bar-label">Berat Rata-rata</span>
+                  <div class="bar-pair">
+                    <div class="bar bar-before" id="bar-weight-before" style="width: 50%"><span class="bar-text">Awal</span></div>
+                    <div class="bar bar-after" id="bar-weight-after" style="width: 80%"><span class="bar-text">Baru</span></div>
+                  </div>
+                </div>
+                <div class="bar-group">
+                  <span class="bar-label">Ketahanan Penyakit Rata-rata</span>
+                  <div class="bar-pair">
+                    <div class="bar bar-before" id="bar-health-before" style="width: 60%"><span class="bar-text">Awal</span></div>
+                    <div class="bar bar-after" id="bar-health-after" style="width: 90%"><span class="bar-text">Baru</span></div>
+                  </div>
+                </div>
+                <div class="bar-group">
+                  <span class="bar-label">Telur Rata-rata (Betina)</span>
+                  <div class="bar-pair">
+                    <div class="bar bar-before" id="bar-eggs-before" style="width: 55%"><span class="bar-text">Awal</span></div>
+                    <div class="bar bar-after" id="bar-eggs-after" style="width: 85%"><span class="bar-text">Baru</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="reset-btn-container text-center">
+            <button id="btn-reset" class="btn btn-reset">🔄 Ulangi Simulasi</button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Navigation Footer (Prev & Next Buttons) -->
+    <footer class="app-footer" id="navigation-footer" style="display: none;">
+      <button id="btn-back" class="nav-btn btn-secondary">
+        <span class="arrow">◀</span> Kembali
+      </button>
+      <div class="footer-hint">Selesaikan tiap tahap untuk mengembangbiakkan ayam!</div>
+      <button id="btn-next" class="nav-btn btn-primary">
+        Lanjut <span class="arrow">▶</span>
+      </button>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
