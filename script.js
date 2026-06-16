@@ -166,7 +166,7 @@ function performCrossover() {
     // let's average: (Father's egg gene [0] + Mother's eggs) / 2 = Mother's eggs / 2.
     // Or we can assume rooster carries egg gene equivalent to 0. 
     // Let's do (0 + mother.eggs) / 2 as per standard average of parent attributes.
-    const eggs = Math.round((0 + mother.eggs) / 2);
+    const eggs = Math.round((0 + mother.eggs) * 1.5);
     
     state.offspring.push({
       name: `Anak Ayam ${index + 1}`,
@@ -175,7 +175,7 @@ function performCrossover() {
       weight: weight,
       health: health,
       eggs: eggs,
-      mutationChance: 0.3
+      mutationChance: 0.5
     });
   });
 }
